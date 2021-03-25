@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <!--  style for right to left and left to right  -->
+    <link rel="stylesheet" href="/temp/home/ltr-rtl.css">
+
+    <!--  style for header and footer  -->
+    <link rel="stylesheet" href="/temp/header/header.css">
+    <link rel="stylesheet" href="/temp/header/footer.css">
+    <script src="/temp/header/header.js"></script>
+    <!--===============================================================================================-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--  js method to sort column of table -->
+    <script src="/temp/request-form/js/sorttable.js" type="text/javascript"></script>
+
+    <style>
+        .th1{
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .td1 {
+            font-size: 15px;
+        }
+    </style>
+
+</head>
+<body>
+
+<!--  header  -->
+<!--===============================================================================================-->
+<div>
+    <div th:if="#{direction} == 'ltr'" th:class="#{direction}">
+        <div class="topnav" id="myTopnav">
+            <a href="/home" class="active" th:text="#{home.bar.home.icon}">Home</a>
+            <a href="/admin/information" th:text="#{admin.home.icon.profile}">Profile</a>
+            <a href="/admin/show/admin-list" th:text="#{role.admin}">Admin</a>
+            <a href="/admin/show/responsible-list" th:text="#{role.responsible}">Responsible</a>
+            <a href="/admin/show/user-list" th:text="#{role.user}">User</a>
+            <a href="/logout" th:text="#{home.bar.logout.icon}" class="pull-right" style="background-color: orange">Logout</a>
+            <a href="/admin/change-password" th:text="#{admin.home.icon.change-password}" class="pull-right"
+               style="background-color: salmon">Change Password</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+    <div th:if="#{direction} == 'rtl'" th:class="#{direction}">
+        <div class="topnav1" id="myTopnav1">
+            <a href="/home" class="active" th:text="#{home.bar.home.icon}">Home</a>
+            <a href="/admin/information" th:text="#{admin.home.icon.profile}">Profile</a>
+            <a href="/admin/show/admin-list" th:text="#{role.admin}">Admin</a>
+            <a href="/admin/show/responsible-list" th:text="#{role.responsible}">Responsible</a>
+            <a href="/admin/show/user-list" th:text="#{role.user}">User</a>
+            <a href="/logout" th:text="#{home.bar.logout.icon}" class="pull-left" style="background-color: orange">Logout</a>
+            <a href="/admin/change-password" th:text="#{admin.home.icon.change-password}" class="pull-left"
+               style="background-color: salmon">Change Password</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!--  end header-->
+<!--===============================================================================================-->
+
+<br>
+<br>
+
+<div th:class="#{direction}">
+    <div class="container">
+        <div>
+            <h2 th:text="#{responsible.information-and-response.header}">Control of responsible by the admin</h2>
+        </div>
+
+        <br>
+
+        <div>
+            <h4 th:text="#{responsible.responsible-Information.header}" style="font-weight: bold; color: #00acee">
+                Responsible Information</h4>
+        </div>
+
+        <br>
+
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <td th:text="#{register.label.firstname}" class="th1">Firstname</td>
+                <td th:text="${user.firstname}" class="td1"></td>
+            </tr>
+            <tr>
+                <td th:text="#{register.label.lastname}" class="th1">Lastname</td>
+                <td th:text="${user.lastname}" class="td1"></td>
+            </tr>
+            <tr>
+                <td th:text="#{register.label.username}" class="th1">Username</td>
+                <td th:text="${user.username}" class="td1"></td>
+            </tr>
+            <tr>
+                <td th:text="#{register.label.email}" class="th1">Email</td>
+                <td th:text="${user.email}" class="td1"></td>
+            </tr>
+            <tr>
+                <td th:text="#{register.label.phone-number}" class="th1">Phone</td>
+                <td th:text="${user.phone}" class="td1"></td>
+            </tr>
+            <tr>
+                <td th:text="#{register.label.national-code}" class="th1">National Code</td>
+                <td th:text="${user.nationalCode}" class="td1"></td>
+            </tr>
+            <tr>
+                <td th:text="#{subject.table.column.edit}" class="th1">Edit</td>
+                <td>
+                    <a th:href="${'/admin/show/user-list/edit/'+ user.id}">
+                        <button type="button" class="btn btn-warning">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="#{user.change-password}" class="th1">Change Password</td>
+                <td>
+                    <a th:href="${'/admin/change-password/responsible-user?user-id='+ user.id}">
+                        <button type="button" class="btn btn-info">
+                            <span class="glyphicon glyphicon-scissors"></span>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="#{subject.table.column.delete}" class="th1">Delete</td>
+                <td th:switch="${user.isDeleted}" style="vertical-align: middle;">
+                    <div th:case="${true}">
+                        <a th:href="${'/admin/show/user-list/is-deleted/'+ user.id}">
+                            <button type="button" class="btn" style="color: red">
+                                <span class="glyphicon glyphicon-ok-sign"></span>
+                            </button>
+                        </a>
+                    </div>
+                    <div th:case="${false}">
+                        <a th:href="${'/admin/show/user-list/is-deleted/'+ user.id}">
+                            <button type="button" class="btn" style="color: green">
+                                <span class="glyphicon glyphicon-remove-sign"></span>
+                            </button>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="#{responsible.table.column.active}" class="th1">Active</td>
+                <td th:switch="${user.isEnabled}" style="vertical-align: middle;">
+                    <div th:case="${true}">
+                        <a th:href="${'/admin/show/user-list/is-enable/'+ user.id}">
+                            <button type="button" class="btn" style="color: green">
+                                <span class="glyphicon glyphicon-ok-sign"></span>
+                            </button>
+                        </a>
+                    </div>
+                    <div th:case="${false}">
+                        <a th:href="${'/admin/show/user-list/is-enable/'+ user.id}">
+                            <button type="button" class="btn" style="color: red">
+                                <span class="glyphicon glyphicon-remove-sign"></span>
+                            </button>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <div>
+            <h4 th:text="#{responsible.responsible-response.header}" style="font-weight: bold; color: #00acee">
+                Responsible Response</h4>
+        </div>
+
+        <br>
+
+        <div th:if="${#lists.size(user.responsibleAnswers) == 0}">
+            <h2 th:text="#{responsible.no-response.header}">No Response have been submitted yet</h2>
+        </div>
+
+        <div th:if="${#lists.size(user.responsibleAnswers) != 0}">
+            <table class="table table-bordered table-striped table-hover sortable">
+                <thead style="background-color: #abdde5">
+                <tr>
+                    <td th:text="#{responsible.column.id}" class="th1">Id</td>
+                    <td  th:text="#{responsible.column.describtion}" class="th1">Describtion</td>
+                    <td th:text="#{responsible.column.date}" class="th1">Date</td>
+                    <td th:text="#{responsible.column.all-details}" class="th1">All Details</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="response : ${user.responsibleAnswers}">
+                    <td th:text="${response.id}" class="td1"></td>
+                    <td th:text="${response.describtion}" class="td1"></td>
+                    <td th:text="${response.date}" class="td1"></td>
+                    <td class="text-center">
+                        <a th:href="${'/admin/show/responsible-list/details/response/'+ response.id}">
+                            <button type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--  footer  -->
+<!--===============================================================================================-->
+<footer class="site-footer">
+    <div th:class="#{direction}">
+        <div th:if="#{direction} == 'rtl'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-md-3">
+                        <h6 th:text="#{footer.head.quick-links}" style="font-size: 18px">Quick Links</h6>
+                        <ul class="footer-links" style="font-size: 17px">
+                            <li><a href="/education"
+                                   th:text="#{footer.link.education}">Education</a></li>
+                            <li><a href="/about-us" th:text="#{home.bar.about-us.icon}">About
+                                Us</a>
+                            </li>
+                            <li><a href="/contact-us" th:text="#{footer.link.contact-us}">Contact
+                                Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h6 th:text="#{footer.head.about}" style="font-size: 18px">About</h6>
+                        <p class="text-justify" th:text="#{footer.text.about}" style="font-size: 17px"></p>
+                    </div>
+
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div th:if="#{direction} == 'ltr'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h6 th:text="#{footer.head.about}">About</h6>
+                        <p class="text-justify" th:text="#{footer.text.about}"></p>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <h6 th:text="#{footer.head.quick-links}">Quick Links</h6>
+                        <ul class="footer-links">
+                            <li><a href="/education"
+                                   th:text="#{footer.link.education}">Education</a></li>
+                            <li><a href="/about-us" th:text="#{home.bar.about-us.icon}">About
+                                Us</a>
+                            </li>
+                            <li><a href="/contact-us" th:text="#{footer.link.contact-us}">Contact
+                                Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                    <a href="https://maktabsharif.ir/">Maktab Investmene Co</a>.
+                </p>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                    <li><a class="dribbble" href="https://github.com/M-Mosaiebzadeh"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li><a class="linkedin" href="https://www.linkedin.com/in/mohammadreza-mosaiebzadeh/"><i
+                            class="fa fa-linkedin"></i></a></li>
+                    <li><a class="facebook" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="twitter" href="https://twitter.com/?lang=en"><i class="fa fa-twitter"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--  end footer  -->
+<!--===============================================================================================-->
+
+</body>
+</html>

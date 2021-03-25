@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Edit Request</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/temp/request-form/images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/css/upload.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+<div class="bg-contact100" style="background-image: url('../../static/temp/request-form/images/bg-01.jpg');">
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+            <div class="contact100-pic js-tilt" data-tilt>
+                <img src="/temp/request-form/images/img-01.png" alt="IMG">
+            </div>
+
+            <form th:action="@{/user/request/make-request}" th:object="${request}" method="post"
+                  enctype="multipart/form-data" class="contact100-form validate-form">
+					<span class="contact100-form-title">
+						Edit your request
+					</span>
+
+                <div class="wrap-input100 validate-input" readonly="">
+<!--                    th:field="*{subject.id}"-->
+                    <select class="input100">
+                        <option th:text="${request.subject.title}"
+                                class="form-control form-rounded">
+                        </option>
+                    </select>
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Message is required">
+                						<textarea th:field="*{describtion}" name="describtion" th:text="${request.describtion}" placeholder="Message"
+                                                  class="input100"></textarea>
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="files hidden" data-files></div>
+                <div class="dropzone" data-dropzone>
+                    <div class="dropzone__field">
+                        <label class="dropzone__label" for="files" data-dropzone-label>Upload files</label>
+                        <input class="dropzone__file" id="files" name="document" type="file"
+                               multiple data-dropzone-file accept="image/*, application/pdf, application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                    </div>
+                    <button class="dropzone__upload button" name="uploadFile" type="submit">Upload files</button>
+                </div>
+
+                <input type="hidden" th:field="*{id}" th:value="${request.id}">
+                <input type="hidden" th:field="*{status}" th:value="${request.status}">
+                <input type="hidden" th:field="*{user}" th:value="${request.user}">
+                <input type="hidden" th:field="*{subject}" th:value="${request.subject}">
+
+
+                <div class="container-contact100-form-btn">
+                    <input type="submit" value="Send" class="contact100-form-btn"/>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--===============================================================================================-->
+<script src="/temp/request-form/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/vendor/bootstrap/js/popper.js"></script>
+<script src="/temp/request-form/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/js/upload.js"></script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/vendor/tilt/tilt.jquery.min.js"></script>
+<script>
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>

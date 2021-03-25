@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title th:text="#{responsible.home.title}">Responsible Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/temp/home/admin-home/css/style.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="/temp/home/ltr-rtl.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+<div th:class="#{direction}">
+    <div th:if="#{direction} == 'rtl'">
+        <div style="text-align: right">
+            <div class="wrapper d-flex align-items-stretch">
+                <nav id="sidebar">
+                    <div class="img bg-wrap text-center py-4"
+                         style="background-image: url(/temp/home/admin-home/images/bg_1.jpg);">
+                        <div class="user-logo">
+                            <div class="img"
+                                 style="background-image: url(/temp/home/admin-home/images/logo.jpg);"></div>
+                            <h3>
+                                <a href="/responsible/information" style="color: #5eca28; font-weight: bold" th:text="${'.: '+username.toUpperCase()+' :.'}">responsible name</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled components mb-5">
+                        <li class="active">
+                            <a href="/">
+                                <span class="fa fa-home mr-3" th:text="' ' + #{home.bar.home.icon}" style="font-size: 20px"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/responsible/information">
+                                <span class="fa fa-user mr-3" th:text="' ' + #{admin.home.icon.profile}" style="font-size: 20px"></span>
+                            </a>
+                        </li>
+                        <li class="dropleft">
+                            <a data-toggle="dropdown">
+                                <span class="caret fa fa-commenting  mr-3" th:text="' ' + #{responsible.home.icon.requests}" style="font-size: 20px;"></span>
+                            </a>
+                            <ul class="dropdown1 dropdown-menu" style="background-color: #32373d; text-align: right;">
+                                <li>
+                                    <a href="/responsible/response/show/all-request" th:text="#{responsible.home.icon.show-all-request}" style="font-size: 17px">Show All Request</a>
+                                </li>
+<!--                                <li>-->
+<!--                                    <a href="/responsible/response/show/request-back" th:text="#{responsible.home.icon.request-back}" style="font-size: 17px">Request Back</a>-->
+<!--                                </li>-->
+                            </ul>
+                        </li>
+                        <li class="dropleft">
+                            <a data-toggle="dropdown">
+                                <span class="caret fa fa-cog  mr-3" th:text="' ' + #{admin.home.icon.settings}"
+                                      style="font-size: 20px;"></span>
+                            </a>
+                            <ul class="dropdown1 dropdown-menu" style="background-color: #32373d; text-align: right;">
+                                <li>
+                                    <a href="/responsible/change-password" th:text="' ' + #{admin.home.icon.change-password}" style="font-size: 17px"></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" >
+                                <span class="fa fa-support mr-3" th:text="' ' + #{admin.home.icon.support}" style="font-size: 20px"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <form action="/logout" method="post">
+                                <button type="submit" class="fa fa-sign-out mr-3 btn btn-info" th:text="' ' + #{home.bar.logout.icon}" style="margin: 10px">Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+
+
+                <!-- Page Content  -->
+                <div id="content" class="p-4 p-md-5 pt-5">
+                    <h2 class="mb-4" th:text="#{responsible.home.text.head}">Welcome To Responsible Panel</h2>
+
+
+                    <div th:if="${success}" role="alert" class="alert alert-success text-center">
+                        <h5 th:text="${success}"></h5>
+                    </div>
+                    <div th:if="${success1}" role="alert" class="alert alert-success text-center">
+                        <p th:text="${success1}" style="font-size: 18px"></p>
+                    </div>
+
+                    <div th:if="${error}" th:text="${error}" role="alert" class="alert alert-danger text-center">
+                        <h4 th:text="${error}"></h4>
+                    </div>
+
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex
+                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit
+                        anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex
+                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit
+                        anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                </button>
+            </div>
+            <div class="img bg-wrap text-center py-4"
+                 style="background-image: url(/temp/home/admin-home/images/bg_1.jpg);">
+                <div class="user-logo">
+                    <div class="img"
+                         style="background-image: url(/temp/home/admin-home/images/logo.jpg);"></div>
+                    <h3>
+                        <a href="/responsible/information" style="color: #5eca28; font-weight: bold" th:text="${'.: '+username.toUpperCase()+' :.'}">responsible name</a>
+                    </h3>
+                </div>
+            </div>
+            <ul class="list-unstyled components mb-5">
+                <li class="active">
+                    <a href="/">
+                        <span class="fa fa-home mr-3" th:text="' ' + #{home.bar.home.icon}" style="font-size: 20px"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/responsible/information">
+                        <span class="fa fa-user mr-3" th:text="' ' + #{admin.home.icon.profile}" style="font-size: 20px"></span>
+                    </a>
+                </li>
+
+                <li class="dropright">
+                    <a class="dropdown-toggle fa fa-commenting" data-toggle="dropdown">
+                        <span class="caret" th:text="' ' + #{responsible.home.icon.requests}" style="font-size: 20px"></span>
+                    </a>
+                    <ul class="dropdown1 dropdown-menu" style="background-color: #32373d">
+                        <li>
+                            <a href="/responsible/response/show/all-request" th:text="#{responsible.home.icon.show-all-request}">Show All Request</a>
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="/responsible/response/show/request-back" th:text="#{responsible.home.icon.request-back}">Request Back</a>-->
+<!--                        </li>-->
+                    </ul>
+                </li>
+                <li class="dropright">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret fa fa-cog mr-3" th:text="' ' + #{admin.home.icon.settings}"
+                                      style="font-size: 20px;"></span>
+                    </a>
+                    <ul class="dropdown1 dropdown-menu" style="background-color: #32373d; text-align: right;">
+                        <li>
+                            <a href="/responsible/change-password" th:text="' ' + #{admin.home.icon.change-password}"></a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >
+                        <span class="fa fa-support mr-3" th:text="' ' + #{admin.home.icon.support}" style="font-size: 20px"></span>
+                    </a>
+                </li>
+                <li>
+                    <form action="/logout" method="post">
+                        <button type="submit" class="fa fa-sign-out mr-3 btn btn-info" th:text="#{home.bar.logout.icon}" style="margin: 10px">Logout
+                        </button>
+                    </form>
+                </li>
+            </ul>
+
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            <h2 class="mb-4"th:text="#{responsible.home.text.head}">Welcome To Responsible Panel</h2>
+
+
+            <div th:if="${success}" role="alert" class="alert alert-success text-center">
+                <h5 th:text="${success}"></h5>
+            </div>
+            <div th:if="${success1}" role="alert" class="alert alert-success text-center">
+                <p th:text="${success1}" style="font-size: 18px"></p>
+            </div>
+
+            <div th:if="${error}" th:text="${error}" role="alert" class="alert alert-danger text-center">
+                <h4 th:text="${error}"></h4>
+            </div>
+
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit
+                anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit
+                anim id est laborum.</p>
+        </div>
+    </div>
+</div>
+<script src="/temp/home/admin-home/js/jquery.min.js"></script>
+<script src="/temp/home/admin-home/js/popper.js"></script>
+<script src="/temp/home/admin-home/js/bootstrap.min.js"></script>
+<script src="/temp/home/admin-home/js/main.js"></script>
+</body>
+</html>

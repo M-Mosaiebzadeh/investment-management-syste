@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title th:text="#{request.title.request-form}">Request Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/temp/request-form/images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/css/upload.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/temp/request-form/css/main.css">
+    <!--===============================================================================================-->
+    <!--  style for right to left and left to right  -->
+    <link rel="stylesheet" href="/temp/home/ltr-rtl.css">
+
+</head>
+<body>
+<div th:class="#{direction}">
+    <div class="bg-contact100" style="background-image: url('../../static/temp/request-form/images/bg-01.jpg');">
+        <div class="container-contact100">
+            <div class="wrap-contact100">
+                <div class="contact100-pic js-tilt" data-tilt>
+                    <img src="/temp/request-form/images/img-01.png" alt="IMG">
+                </div>
+
+                <form th:action="@{/user/request/make-request}" th:object="${request}" method="post"
+                      enctype="multipart/form-data" class="contact100-form validate-form">
+
+                    <div>
+
+					<span th:if="#{direction} == rtl" th:text="#{request.header.make-new-request}"
+                          style="text-align: right;font-weight: bold"
+                          class="contact100-form-title">
+					</span>
+
+                        <span th:if="#{direction} == ltr" th:text="#{request.header.make-new-request}"
+                              class="contact100-form-title">
+					</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" dir="ltr">
+                        <select th:field="*{subject.id}" class="input100">
+                            <div th:each="sub : ${requestSubjects}">
+                                <div th:if="${sub.isDeleted != true}">
+                                    <option th:value="${sub.id}" th:text="${sub.title}"
+                                            class="form-control form-rounded">
+                                    </option>
+                                </div>
+                            </div>
+                        </select>
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Message is required">
+                						<textarea th:field="*{describtion}" name="describtion"
+                                                  th:placeholder="#{request.field.message}"
+                                                  id="describtion" maxlength="10" class="input100" style="margin-bottom: 10px"></textarea>
+                        <span class="focus-input100"></span>
+                        <span id="message" style="color: #8a3ab9"></span>
+                        <div>
+                            <p id="characters-remaining" th:if="#{direction} == ltr" style="font-size: 0px">Characters
+                                Remaining</p>
+                            <p id="characters-remaining" th:if="#{direction} == rtl" style="font-size: 0px">کارکتر باقی
+                                مانده</p>
+                        </div>
+                    </div>
+
+
+                    <div class="files hidden" data-files></div>
+                    <div class="dropzone" data-dropzone>
+                        <div class="dropzone__field">
+                            <label class="dropzone__label" for="files" data-dropzone-label
+                                   th:text="#{request.button.upload-file}">Upload files</label>
+                            <input class="dropzone__file" id="files" name="document" type="file"
+                                   multiple data-dropzone-file
+                                   accept="image/*, application/pdf, application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                        </div>
+                        <button class="dropzone__upload button" name="uploadFile" type="submit">Upload files</button>
+                    </div>
+
+                    <input type="hidden" th:field="*{status}" th:value="${request.status}">
+                    <input type="hidden" th:field="*{user}" th:value="${request.user}">
+
+                    <div class="container-contact100-form-btn">
+                        <input type="submit" th:value="#{request.button.send}" class="contact100-form-btn"/>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--===============================================================================================-->
+<script src="/temp/request-form/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/vendor/bootstrap/js/popper.js"></script>
+<script src="/temp/request-form/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/js/upload.js"></script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/js/character-remaining.js"></script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/vendor/tilt/tilt.jquery.min.js"></script>
+<script>
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->
+<script src="/temp/request-form/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>

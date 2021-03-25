@@ -1,0 +1,11 @@
+
+.rtl {
+    direction: rtl;
+}
+
+.ltr {
+    direction: ltr;
+}
+
+.text-center {
+    text-align: center !important; }

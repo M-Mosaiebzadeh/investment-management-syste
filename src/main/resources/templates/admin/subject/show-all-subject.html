@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <!--  style for right to left and left to right  -->
+    <link rel="stylesheet" href="/temp/home/ltr-rtl.css">
+
+    <!--  style for header and footer  -->
+    <link rel="stylesheet" href="/temp/header/header.css">
+    <link rel="stylesheet" href="/temp/header/footer.css">
+    <script src="/temp/header/header.js"></script>
+    <!--===============================================================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>All Subject</title>
+
+    <style>
+        .th1 {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .td1 {
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<!--  header  -->
+<!--===============================================================================================-->
+<div>
+    <div th:if="#{direction} == 'ltr'" th:class="#{direction}">
+        <div class="topnav" id="myTopnav">
+            <a href="/home" class="active" th:text="#{home.bar.home.icon}">Home</a>
+            <a href="/admin/information" th:text="#{admin.home.icon.profile}">Profile</a>
+            <a href="/admin/show/admin-list" th:text="#{role.admin}">Admin</a>
+            <a href="/admin/show/responsible-list" th:text="#{role.responsible}">Responsible</a>
+            <a href="/admin/show/user-list" th:text="#{role.user}">User</a>
+            <a href="/logout" th:text="#{home.bar.logout.icon}" class="pull-right" style="background-color: orange">Logout</a>
+            <a href="/admin/change-password" th:text="#{admin.home.icon.change-password}" class="pull-right"
+               style="background-color: salmon">Change Password</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+    <div th:if="#{direction} == 'rtl'" th:class="#{direction}">
+        <div class="topnav1" id="myTopnav1">
+            <a href="/home" class="active" th:text="#{home.bar.home.icon}">Home</a>
+            <a href="/admin/information" th:text="#{admin.home.icon.profile}">Profile</a>
+            <a href="/admin/show/admin-list" th:text="#{role.admin}">Admin</a>
+            <a href="/admin/show/responsible-list" th:text="#{role.responsible}">Responsible</a>
+            <a href="/admin/show/user-list" th:text="#{role.user}">User</a>
+            <a href="/logout" th:text="#{home.bar.logout.icon}" class="pull-left" style="background-color: orange">Logout</a>
+            <a href="/admin/change-password" th:text="#{admin.home.icon.change-password}" class="pull-left"
+               style="background-color: salmon">Change Password</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!--  end header-->
+<!--===============================================================================================-->
+
+<br>
+<br>
+
+<div th:class="#{direction}">
+    <div class="container">
+        <h2 th:text="#{subject.text.all-subject-list}">All Subject List</h2>
+
+        <br>
+        <br>
+
+        <table class="table table-bordered table-striped table-hover">
+
+            <tr>
+                <td th:text="#{subject.text.new-subject}" class="th1">New Subject</td>
+                <td class="text-center">
+                    <form th:action="@{/admin/new-subject}" method="get">
+                        <input type="text" name="title" th:placeholder="#{subject.placeholder.subject-title}" minlength="3" required>
+                        <button type="submit" class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <table class="table table-bordered table-striped table-hover">
+
+            <tr th:if="*{#lists.size(subjects) != 0}" class="th1">
+                <td th:text="#{subject.table.column.title}">Title</td>
+                <td th:text="#{subject.table.column.edit}">Edit</td>
+                <td th:text="#{subject.table.column.delete}">Delete</td>
+            </tr>
+            <tr th:each="subject : ${subjects}">
+                <form th:action="@{/admin/edit-subject}" method="post">
+                    <td>
+                        <input type="hidden" name="id" th:value="${subject.id}">
+                        <input type="text" name="title" th:value="${subject.title}">
+                    </td>
+                    <td class="text-center">
+                        <button type="submit" class="btn btn-warning">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    </td>
+                </form>
+                <td class="text-center">
+                    <form th:action="@{/admin/delete-subject}" method="post">
+                        <input type="hidden" name="id" th:value="${subject.id}">
+                        <input type="hidden" name="title" th:value="${subject.title}">
+                        <input type="hidden" name="isDeleted" th:value="${subject.isDeleted}">
+                        <div th:switch="${subject.isDeleted}">
+                            <div th:case="${true}">
+                                <button type="submit" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
+                            <div th:case="${false}">
+                                <button type="submit" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!--  footer  -->
+<!--===============================================================================================-->
+<footer class="site-footer">
+    <div th:class="#{direction}">
+        <div th:if="#{direction} == 'rtl'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-md-3">
+                        <h6 th:text="#{footer.head.quick-links}" style="font-size: 18px">Quick Links</h6>
+                        <ul class="footer-links" style="font-size: 17px">
+                            <li><a href="/education"
+                                   th:text="#{footer.link.education}">Education</a></li>
+                            <li><a href="/about-us" th:text="#{home.bar.about-us.icon}">About
+                                Us</a>
+                            </li>
+                            <li><a href="/contact-us" th:text="#{footer.link.contact-us}">Contact
+                                Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h6 th:text="#{footer.head.about}" style="font-size: 18px">About</h6>
+                        <p class="text-justify" th:text="#{footer.text.about}" style="font-size: 17px"></p>
+                    </div>
+
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div th:if="#{direction} == 'ltr'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h6 th:text="#{footer.head.about}">About</h6>
+                        <p class="text-justify" th:text="#{footer.text.about}"></p>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <h6 th:text="#{footer.head.quick-links}">Quick Links</h6>
+                        <ul class="footer-links">
+                            <li><a href="/education"
+                                   th:text="#{footer.link.education}">Education</a></li>
+                            <li><a href="/about-us" th:text="#{home.bar.about-us.icon}">About
+                                Us</a>
+                            </li>
+                            <li><a href="/contact-us" th:text="#{footer.link.contact-us}">Contact
+                                Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                    <a href="https://maktabsharif.ir/">Maktab Investmene Co</a>.
+                </p>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                    <li><a class="dribbble" href="https://github.com/M-Mosaiebzadeh"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li><a class="linkedin" href="https://www.linkedin.com/in/mohammadreza-mosaiebzadeh/"><i
+                            class="fa fa-linkedin"></i></a></li>
+                    <li><a class="facebook" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="twitter" href="https://twitter.com/?lang=en"><i class="fa fa-twitter"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--  end footer  -->
+<!--===============================================================================================-->
+
+</body>
+</html>

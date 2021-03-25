@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register Form</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="/temp/register-form/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="/temp/register-form/css/style.css">
+</head>
+<body>
+
+<div class="main">
+    <div class="container">
+        <div th:class="#{direction}">
+            <div class="signup-content">
+                <div class="signup-img">
+                    <img src="/temp/register-form/images/4401305.jpg" alt="" style="margin-top: 110px">
+                </div>
+                <div class="signup-form">
+                    <form action="#" th:action="${address}" th:object="${user}" method="post"
+                          class="register-form"
+                          id="register-form">
+                        <div>
+                            <h2 th:if="${!address.contains('/admin/responsible-registration')}" th:text="#{register.text.head}">Registration Form</h2>
+                            <h2 th:if="${address.contains('/admin/responsible-registration')}" th:text="#{register.text.head2}">
+                                Responsible registration form</h2>
+                        </div>
+
+                        <div th:if="${success}" role="alert" class="alert alert-success text-center">
+                            <h5 th:text="${success}"></h5>
+                        </div>
+
+                        <div th:if="${error}" th:text="${error}" role="alert" class="alert alert-danger text-center">
+                            <h5 th:text="${error}"></h5>
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstname" class="label"
+                                       th:text="#{register.label.firstname}">Firstname</label>
+                                <input type="text" th:feild="*{firstname}" name="firstname" id="firstname"
+                                       placeholder="ex: reza"
+                                       required pattern="[a-zA-Z]{2,50}">
+                                <label th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">firstname
+                                    Error</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="label"
+                                       th:text="#{register.label.lastname}">Lastname</label>
+                                <input type="text" th:feild="*{lastname}" name="lastname" id="lastname"
+                                       placeholder="ex: razavi" required pattern="[a-zA-Z]{2,50}"
+                                       title="lastname must be character in size 2-50"
+                                       class="input--style-4">
+                                <label th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">lastname
+                                    Error</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nationalCode" class="label" th:text="#{register.label.national-code}">National
+                                Code</label>
+                            <input type="text" th:feild="*{nationalCode}" name="nationalCode" id="nationalCode"
+                                   placeholder="ex: 1234567890" required pattern="[0-9]{10}"
+                                   title="national code must be digit in size 10"
+                                   class="input--style-4">
+                            <label th:if="${#fields.hasErrors('nationalCode')}" th:errors="*{nationalCode}">phone
+                                Error</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="label" th:text="#{register.label.email}">Email</label>
+                            <input type="email" th:feild="*{email}" name="email" id="email"
+                                   placeholder="ex: reza@razavi.com" required
+                                   pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                                   title="Invalid email address" class="input--style-4">
+                            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="label" th:text="#{register.label.phone-number}">Phone
+                                Number</label>
+                            <input type="tel" th:feild="*{phone}" name="phone" id="phone"
+                                   placeholder="ex: 09101234567" required pattern="[0]{1}[9]{1}[0-9]{9}"
+                                   title="phone number must be start with 09xx-xxxxxxx and 11 digit"
+                                   class="input--style-4">
+                            <label th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phone Error</label>
+                        </div>
+                        <div class="form-radio">
+                            <!--                            <label for="gender" class="radio-label">Gender :</label>-->
+                            <label class="radio-label" th:text="#{register.label.gender}">Gender</label>
+                            <div class="form-radio-item">
+                                <input type="radio" name="gender" id="male" checked>
+                                <label for="male" th:text="#{register.gender.male}">Male</label>
+                                <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                                <input type="radio" name="gender" id="female">
+                                <label for="female" th:text="#{register.gender.female}">Female</label>
+                                <span class="check"></span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="username" class="label" th:text="#{register.label.username}">Username</label>
+                            <input type="text" th:feild="*{username}" name="username" id="username" required
+                                   minlength="6" maxlength="50"
+                                   class="input--style-4">
+                            <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username
+                                Error</label>
+                        </div>
+                        <div th:if="${address != '/admin/responsible-registration'}">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="password" class="label"
+                                           th:text="#{register.label.password}">Password</label>
+                                    <input type="password" th:feild="*{password}" name="password" id="password"
+                                           onkeyup='check();'
+                                           required pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,}$"
+                                           title="password must be contains at least 1 character,number,symbol and size more than 5"
+                                           class="input--style-4">
+                                    <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password
+                                        Error</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label for="confirm_password" class="label"
+                                               th:text="#{register.label.confirm-password}">Confirm Password</label>
+                                        <input type="password" name="confirm_password" id="confirm_password"
+                                               onkeyup='check();' required
+                                               pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{6,}$"
+                                               title="confirm password as same as password">
+                                        <span id='message' style="font-size: 15px; font-weight: bold"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${address == '/admin/responsible-registration'}">
+                            <input type="hidden" th:feild="*{password}" name="password" th:value="${'klLNFNsdf#&*^sdbfh34gby&%'}">
+                        </div>
+                        <div class="form-submit">
+                            <input type="reset" th:value="#{register.button.reset-all}" class="submit" name="reset"
+                                   id="reset"/>
+                            <input type="submit" th:value="#{register.button.submit-form}" class="submit" name="submit"
+                                   id="submit"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="/temp/register-form/vendor/jquery/jquery.min.js"></script>
+<script src="/temp/register-form/js/main.js"></script>
+
+<script src="/temp/register-form/js/confirm-password.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

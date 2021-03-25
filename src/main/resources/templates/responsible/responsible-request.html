@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--===============================================================================================-->
+    <!--  style for right to left and left to right  -->
+    <link rel="stylesheet" href="/temp/home/ltr-rtl.css">
+
+    <!--  style for header and footer  -->
+    <link rel="stylesheet" href="/temp/header/header.css">
+    <link rel="stylesheet" href="/temp/header/footer.css">
+    <script src="/temp/header/header.js"></script>
+    <!--===============================================================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .th1 {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .td1 {
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<!--  header  -->
+<!--===============================================================================================-->
+<div>
+    <div th:if="#{direction} == 'ltr'" th:class="#{direction}">
+        <div class="topnav" id="myTopnav">
+            <a href="/home" class="active" th:text="#{home.bar.home.icon}">Home</a>
+            <a href="/responsible/information" th:text="#{admin.home.icon.profile}">Profile</a>
+            <a href="/responsible/response/show/all-request" th:text="#{responsible.home.icon.show-all-request}">Show
+                All Request</a>
+            <a href="/logout" th:text="#{home.bar.logout.icon}" class="pull-right" style="background-color: orange">Logout</a>
+            <a href="/responsible/change-password" th:text="#{admin.home.icon.change-password}" class="pull-right"
+               style="background-color: salmon">Change Password</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+    <div th:if="#{direction} == 'rtl'" th:class="#{direction}">
+        <div class="topnav1" id="myTopnav1">
+            <a href="/home" class="active" th:text="#{home.bar.home.icon}">Home</a>
+            <a href="/responsible/information" th:text="#{admin.home.icon.profile}">Profile</a>
+            <a href="/responsible/response/show/all-request" th:text="#{responsible.home.icon.show-all-request}">Show
+                All Request</a>
+            <a href="/logout" th:text="#{home.bar.logout.icon}" class="pull-left" style="background-color: orange">Logout</a>
+            <a href="/responsible/change-password" th:text="#{admin.home.icon.change-password}" class="pull-left"
+               style="background-color: salmon">Change Password</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!--  end header-->
+<!--===============================================================================================-->
+
+<br>
+<br>
+
+<div th:class="#{direction}">
+    <div class="container">
+        <div>
+            <h2 th:text="#{responsible.request-manager.header}">Manage Request</h2>
+        </div>
+
+        <br>
+
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <td th:text="#{user.user-information.header}" class="th1">User Information</td>
+                <td>
+                    <form th:action="@{/responsible/response/user-information}" method="post">
+                        <input type="hidden" name="user-id" th:value="${request.user.id}">
+                        <button type="submit" class="btn btn-info">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td th:text="#{admin.home.icon.subject}" class="th1">Subject</td>
+                <td th:text="${request.subject.title}" class="td1"></td>
+            </tr>
+            <tr>
+                <td th:text="#{responsible.column.describtion}" class="th1">Describtion</td>
+                <td th:text="${request.describtion}" class="td1"></td>
+            </tr>
+            <tr>
+                <td th:text="#{user.column.status}" class="th1">Status</td>
+                <div th:switch="${request.status.name()}">
+                    <div th:case="${'IN_PROGRESS'}">
+                        <td th:text="#{status.in-progress}" style="color: #9fcdff" class="td1"></td>
+                    </div>
+                    <div th:case="${'ANSWERED'}">
+                        <td th:text="#{status.answered}" style="color: mediumseagreen" class="td1"></td>
+                    </div>
+                    <div th:case="${'CLOSED'}">
+                        <td th:text="#{status.closed}" style="color: #1d2124" class="td1"></td>
+                    </div>
+                </div>
+            </tr>
+            <tr>
+                <td th:text="#{responsible.column.date}" class="th1">Date</td>
+                <td th:text="${request.date}" class="td1"></td>
+            </tr>
+            <tr>
+                <div th:if="${request.status.name().equals('IN_PROGRESS')}">
+                    <td th:text="#{responsible.column.answer}" class="th1">Answer</td>
+                    <td>
+                        <form th:action="@{/responsible/response/answer}" method="post">
+                            <input type="hidden" name="request-id" th:value="${request.id}">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </form>
+                    </td>
+                </div>
+                <div th:if="${request.status.name().equals('ANSWERED')}">
+                    <td th:text="#{responsible.column.answer}" class="th1">Answer</td>
+                    <td>
+                        <button type="submit" class="btn btn-success" disabled>
+                            <span class="glyphicon glyphicon-ok-circle"></span>
+                        </button>
+                    </td>
+                </div>
+                <div th:if="${request.status.name().equals('CLOSED')}">
+                    <td th:text="#{responsible.column.answer}" class="th1">Answer</td>
+                    <td>
+                        <button class="btn btn-dark" disabled>
+                            <span class="glyphicon glyphicon-ban-circle"></span>
+                        </button>
+                    </td>
+                </div>
+            </tr>
+            <tr>
+                <td th:text="#{responsible.column.files}" class="th1">Files</td>
+                <td th:if="${#sets.size(request.files) != 0}">
+                    <table class="table table-bordered table-striped table-hover">
+                        <tr>
+                            <td th:text="#{responsible.column.name}" class="th1">Name</td>
+                            <td th:text="#{responsible.column.size}" class="th1">Size</td>
+                            <td th:text="#{responsible.column.file}" class="th1">File</td>
+                        </tr>
+                        <tr th:each="file : ${request.files}" class="text-center">
+                            <td th:text="${file.name}" class="td1"></td>
+                            <td th:text="${#numbers.formatInteger(file.size,4,'COMMA')} + ' ' + #{responsible.column.bytes}"
+                                class="td1"></td>
+                            <td>
+                                <form th:action="@{/user/request/download}" method="post">
+                                    <input type="hidden" name="file-id" th:value="${file.id}">
+                                    <button type="submit" class="btn btn-info">
+                                        <span class="glyphicon glyphicon-file"> File</span>
+                                    </button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    </table>
+                </td>
+                <td th:if="${#sets.size(request.files) == 0}" th:text="#{responsible.column.no-file}" class="td1">No
+                    File
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <div th:if="${response != null}">
+            <h2 th:text="#{responsible.response-of-request.header}">Response of request</h2>
+
+            <br>
+
+            <table class="table table-bordered table-striped table-hover">
+                <tr>
+                    <td th:text="#{responsible.column.describtion}" class="th1">Describtion</td>
+                    <td th:text="${response.describtion}" class="td1"></td>
+                </tr>
+                <tr>
+                    <td th:text="#{responsible.column.date}" class="th1">Date</td>
+                    <td th:text="${response.date}" class="td1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--  footer  -->
+<!--===============================================================================================-->
+<footer class="site-footer">
+    <div th:class="#{direction}">
+        <div th:if="#{direction} == 'rtl'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-md-3">
+                        <h6 th:text="#{footer.head.quick-links}" style="font-size: 18px">Quick Links</h6>
+                        <ul class="footer-links" style="font-size: 17px">
+                            <li><a href="/education"
+                                   th:text="#{footer.link.education}">Education</a></li>
+                            <li><a href="/about-us" th:text="#{home.bar.about-us.icon}">About
+                                Us</a>
+                            </li>
+                            <li><a href="/contact-us" th:text="#{footer.link.contact-us}">Contact
+                                Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h6 th:text="#{footer.head.about}" style="font-size: 18px">About</h6>
+                        <p class="text-justify" th:text="#{footer.text.about}" style="font-size: 17px"></p>
+                    </div>
+
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div th:if="#{direction} == 'ltr'">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h6 th:text="#{footer.head.about}">About</h6>
+                        <p class="text-justify" th:text="#{footer.text.about}"></p>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <h6 th:text="#{footer.head.quick-links}">Quick Links</h6>
+                        <ul class="footer-links">
+                            <li><a href="/education"
+                                   th:text="#{footer.link.education}">Education</a></li>
+                            <li><a href="/about-us" th:text="#{home.bar.about-us.icon}">About
+                                Us</a>
+                            </li>
+                            <li><a href="/contact-us" th:text="#{footer.link.contact-us}">Contact
+                                Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                    <a href="https://maktabsharif.ir/">Maktab Investmene Co</a>.
+                </p>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                    <li><a class="dribbble" href="https://github.com/M-Mosaiebzadeh"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li><a class="linkedin" href="https://www.linkedin.com/in/mohammadreza-mosaiebzadeh/"><i
+                            class="fa fa-linkedin"></i></a></li>
+                    <li><a class="facebook" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="twitter" href="https://twitter.com/?lang=en"><i class="fa fa-twitter"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--  end footer  -->
+<!--===============================================================================================-->
+
+</body>
+</html>

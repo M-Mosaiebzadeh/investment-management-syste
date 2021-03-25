@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title th:text="#{about-us.title.in-memory-of}">In Memory Of</title>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="/temp/home/ltr-rtl.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <style class="INLINE_PEN_STYLESHEET_ID">
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            box-shadow: inset 0 0 5em 1em black;
+            background: black url(https://image.ibb.co/gVQpcw/CEhCIUy.jpg) no-repeat center center;
+            -khtml-background-size: cover;
+            -ms-background-size: cover;
+            background-size: cover;
+        }
+
+        body iframe {
+            display: none;
+        }
+
+        body section.run-credits {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body section.run-credits div.wrapper {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 400px;
+            margin-left: -200px;
+            font: 300 30px/1 "Open Sans Condensed", sans-serif;
+            text-align: center;
+            text-transform: uppercase;
+            color: gray;
+            -webkit-animation: 60s credits linear infinite;
+            animation: 60s credits linear infinite;
+        }
+
+        body section.run-credits div.movie {
+            margin-bottom: 50px;
+            font-size: 50px;
+        }
+
+        body section.run-credits div.job {
+            margin-bottom: 5px;
+            font-size: 25px;
+        }
+
+        body section.run-credits div.name {
+            margin-bottom: 50px;
+            font-size: 35px;
+        }
+
+        @-webkit-keyframes credits {
+            0% {
+                top: 100%;
+            }
+            100% {
+                top: -500%;
+            }
+        }
+
+        @keyframes credits {
+            0% {
+                top: 100%;
+            }
+            100% {
+                top: -500%;
+            }
+        }
+    </style>
+
+
+    <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-d8236034cc3508e70b0763f2575a8bb5850f9aea541206ce56704c013047d712.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-4793b73c6332f7f14a9b6bba5d5e62748e9d1bd0b5c52d7af6376f3d1c625d7e.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
+</head>
+<body>
+<div th:class="#{direction}">
+    <iframe id="youtube-frame" frameborder="0"
+            src="https://youtube.com/embed/8QdyxkTczdM?autoplay=1&amp;controls=0&amp;showinfo=0&amp;autohide=1">
+    </iframe>
+
+    <section id="credits" class="run-credits">
+        <div class="wrapper">
+            <div class="movie" style="color: #00dbde" th:text="#{about-us.text.java-development}">Java Development</div>
+
+            <br>
+
+            <div class="job" style="color: orange" th:text="#{about-us.text.written-and-designed-by}">Coded and designed
+                by
+            </div>
+            <br>
+            <div class="name" th:text="#{about-us.text.mohammadreza-mosaiebzadeh}">Mohammadreza Mosaiebzadeh</div>
+
+            <br>
+
+            <div class="job" style="color: orange" th:text="#{about-us.text.thanks-to-the-course-instructors}">Thanks to
+                the Course Instructors
+            </div>
+
+            <br>
+
+            <div class="name" th:text="#{about-us.text.sajjad-jafari}">Sajjad Jafari</div>
+            <div class="name" th:text="#{about-us.text.ali-nouri}">Ali Nouri</div>
+            <div class="name" th:text="#{about-us.text.mohsen-asgari}">Mohsen Asgari</div>
+            <div class="name" th:text="#{about-us.text.ali-sefidmouy}">Ali Sefidmouy</div>
+            <div class="name" th:text="#{about-us.text.alireza-rezvani}">Alireza Rezvani</div>
+            <div class="name" th:text="#{about-us.text.mohsen-zandi}">Mohsen Zandi</div>
+            <div class="name" th:text="#{about-us.text.zarshad}">Zarshad</div>
+            <div class="name" th:text="#{about-us.text.behnam-salili}">Behnam Salili</div>
+            <div class="name" th:text="#{about-us.text.shahsavan}">Shahsavan</div>
+
+            <br>
+
+            <div class="job" style="color: orange" th:text="#{about-us.text.thanks-to-my-friends}">Thanks to my
+                Friends
+            </div>
+
+            <br>
+
+            <div class="name" th:text="#{about-us.text.ramin-beyrami}">Ramin Beyrami</div>
+            <div class="name" th:text="#{about-us.text.milad-sadeghi}">Milad Sadeghi</div>
+            <div class="name" th:text="#{about-us.text.shayan-zarinkolah}">Shayan Zarinkolah</div>
+            <div class="name" th:text="#{about-us.text.masoud-hassanniya}">Masoud Hassanniya</div>
+            <div class="name" th:text="#{about-us.text.javad-asadi}">Javad Asadi</div>
+            <div class="name" th:text="#{about-us.text.mostafa-jafarzadeh}">Mostafa Jafarzadeh</div>
+            <div class="name" th:text="#{about-us.text.mostafa-zolfi}">Mostafa Zolfi</div>
+            <div class="name" th:text="#{about-us.text.mohammadreza-norouzi}">Mohammadreza Norouzi</div>
+            <div class="name" th:text="#{about-us.text.muhammad-soleimani}">Muhammad Soleimani</div>
+            <div class="name" th:text="#{about-us.text.hosein-habibi}">Hosein Habibi</div>
+            <div class="name" th:text="#{about-us.text.afshin-pardeyaghot}">Afshin Pardeyaghot</div>
+            <div class="name" th:text="#{about-us.text.erfan-salimi}">Erfan Salimi</div>
+            <div class="name" th:text="#{about-us.text.mohammadhosein-rezaeian}">Mohammadhosein Rezaeian</div>
+            <div class="name" th:text="#{about-us.text.ali-rostamian}">Ali Rostamian</div>
+            <div class="name" th:text="#{about-us.text.pourya-mansouri}">Pourya Mansouri</div>
+            <div class="name" th:text="#{about-us.text.mohsen-bayat}">Mohsen Bayat</div>
+            <div class="name" th:text="#{about-us.text.ehsan-shirkohi}">Ehsan Shirkohi</div>
+
+            <br>
+
+            <div class="job" style="color: orange" th:text="#{about-us.text.special-thanks-to}">Special Thanks
+                To
+            </div>
+
+            <br>
+
+            <div class="name" style="font-size: 25px" th:text="#{about-us.text.all-those-who-help-me}">All those who
+                help me in this way
+            </div>
+
+
+            <br>
+
+            <div class="name" style="color: orangered; font-size: 32px " th:text="#{about-us.text.dedicated-to}">Dedicated to all the people I love
+            </div>
+
+        </div>
+    </section>
+</div>
+<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdpn.io/cp/internal/boomboom/pen.js?key=pen.js-5e15e4e7-25d9-d63b-7b7b-f4e0ef59924c"
+        crossorigin=""></script>
+
+</body>
+</html>

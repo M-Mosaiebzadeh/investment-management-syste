@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Error</title>
+
+    <link rel="stylesheet" href="/temp/error/500.css">
+
+</head>
+
+<body>
+<div class="full-screen">
+    <div class="container">
+        <span class="error-num">5</span>
+        <div class="eye" style="transform: rotate(132.25deg);"></div>
+        <div class="eye" style="transform: rotate(132.25deg);"></div>
+
+        <p class="sub-text">Oh eyeballs! Something went wrong. We're <span class="italic">looking</span> to see what happened.</p>
+        <a href="/" style="color: #ed969e; font-size: 20px">Go Home</a>
+    </div>
+</div>
+
+<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    $(".full-screen").mousemove(function(event) {
+        var eye = $(".eye");
+        var x = (eye.offset().left) + (eye.width() / 2);
+        var y = (eye.offset().top) + (eye.height() / 2);
+        var rad = Math.atan2(event.pageX - x, event.pageY - y);
+        var rot = (rad * (180 / Math.PI) * -1) + 180;
+        eye.css({
+            '-webkit-transform': 'rotate(' + rot + 'deg)',
+            '-moz-transform': 'rotate(' + rot + 'deg)',
+            '-ms-transform': 'rotate(' + rot + 'deg)',
+            'transform': 'rotate(' + rot + 'deg)'
+        });
+    });
+</script>
+</body>
+</html>

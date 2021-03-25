@@ -1,0 +1,78 @@
+body, h1 {
+    font-family: "Raleway", Arial, sans-serif
+}
+
+h1 {
+    letter-spacing: 6px
+}
+
+.w3-row-padding img {
+    margin-bottom: 12px
+}
+
+body {
+    background-image: url('/temp/home/images/background-header.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #1b1e21;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.language {
+    background-position: center;
+    margin-left: 20px;
+    color: #7dca4f;
+}
+
+.language2 {
+    /*width: 30px;*/
+    text-align: center;
+}
+
+/*select#locale option[value="en"]   { background-image:url(static/temp/home/images/icons/en.png);   }*/
+/*select#locale option[value="fa"] { background-image:url(female.png); }*/
+/*select#locale option[value="de"] { background-image:url(others.png); }*/
+
+.head-title1 {
+    color: #b1dfbb;
+    font-size: 40px;
+    margin-top: -30px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.footer1 {
+    margin-top: 50px;
+    padding: 45px;
+}
+.fa-facebook-official:hover {
+    color:  #4267b2;
+}
+
+.fa-instagram:hover {
+    color: #8a3ab9;
+}
+
+.fa-snapchat:hover {
+    color: #FFFC00;
+}
+
+.fa-pinterest-p:hover {
+color: 	#E60023;
+}
+
+.fa-twitter:hover {
+color:  #00acee;
+}
+
+.fa-linkedin:hover {
+color:  #0072b1;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.ltr {
+    direction: ltr;
+}
